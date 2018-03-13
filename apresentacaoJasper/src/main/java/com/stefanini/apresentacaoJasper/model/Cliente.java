@@ -1,6 +1,6 @@
 package com.stefanini.apresentacaoJasper.model;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,11 +26,11 @@ public class Cliente {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private String dataNascimento;
+	private Date dataNascimento;
 	
 	@OneToMany
 	@JoinColumn(name = "id")
-	private List<Filme> filmes;
+	private Filme filme;
 
 	public Integer getId() {
 		return id;
@@ -56,19 +56,19 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public List<Filme> getFilmes() {
-		return filmes;
+	public Filme getFilme() {
+		return filme;
 	}
 
-	public void setFilmes(List<Filme> filmes) {
-		this.filmes = filmes;
+	public void setFilme(Filme filme) {
+		this.filme = filme;
 	}
 }

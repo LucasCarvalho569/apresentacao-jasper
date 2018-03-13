@@ -1,14 +1,13 @@
 package com.stefanini.apresentacaoJasper.DTO;
 
 import java.util.Date;
-import java.util.List;
 
 public class ClienteDTO {
 	private Integer id;
 	private String nome;
 	private String cpf;
 	private Date dataNascimento;
-	private List<FilmeDTO> filmes;
+	private FilmeDTO filme;
 	
 	public Integer getId() {
 		return id;
@@ -34,10 +33,10 @@ public class ClienteDTO {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	public List<FilmeDTO> getFilmes() {
-		return filmes;
+	public FilmeDTO getFilme() {
+		return filme;
 	}
-	public void setFilmes(List<FilmeDTO> filmes) {
-		this.filmes = filmes;
+	public void setFilme(FilmeDTO filme) {
+		this.filme = filme;
 	}
 }
