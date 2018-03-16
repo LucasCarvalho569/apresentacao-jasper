@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClienteService } from './service/Cliente.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private clienteService: ClienteService) { }
+
+  public gerarRelatorio() {
+    let arquivo;
+    this.clienteService.gerarRelatorio().subscribe(res => {
+      arquivo = res;
+      let fileUrl = URL.createObjectURL(res);
+      var link = document.createElement("a");
+      link.download = this.clienteService.getFileName();
+      link.href = fileUrl;
+      link.click();
+    });
+  }
+
 }
