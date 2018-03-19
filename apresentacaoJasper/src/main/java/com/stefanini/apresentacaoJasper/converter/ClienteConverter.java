@@ -11,6 +11,7 @@ public class ClienteConverter {
 	public static ClienteDTO converter(Cliente cliente) {
 		ClienteDTO clienteDTO = new ClienteDTO();
 		clienteDTO.setId(cliente.getId());
+		clienteDTO.setNome(cliente.getNome());
 		clienteDTO.setCpf(cliente.getCpf());
 		clienteDTO.setDataNascimento(cliente.getDataNascimento());
 		clienteDTO.setFilme(FilmeConverter.converter(cliente.getFilme()));
@@ -20,6 +21,7 @@ public class ClienteConverter {
 	public static Cliente converter(ClienteDTO clienteDTO) {
 		Cliente cliente = new Cliente();
 		cliente.setId(clienteDTO.getId());
+		cliente.setNome(clienteDTO.getNome());
 		cliente.setCpf(clienteDTO.getCpf());
 		cliente.setDataNascimento(clienteDTO.getDataNascimento());
 		cliente.setFilme(FilmeConverter.converter(clienteDTO.getFilme()));

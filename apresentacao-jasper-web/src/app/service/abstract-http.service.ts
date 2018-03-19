@@ -7,7 +7,7 @@ export abstract class AbstractHttpService<T> {
     private filename;
     private DEFAULT_ERROR_MESSAGE = 'Ocorreu um erro inesperado. Por favor tente novamente.';
 
-    private apiUrl: string = 'localhost:8080/';
+    private apiUrl: string = 'http://localhost:8082/';
 
     constructor(
         private resource: string, 

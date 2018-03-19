@@ -1,6 +1,7 @@
 package com.stefanini.apresentacaoJasper.service;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,9 @@ public class ClienteService {
 		JRBeanCollectionDataSource bcds = new JRBeanCollectionDataSource(clientesDTO);
 		Map<String, Object> params = new HashMap<>();
 		params.put("ItemDataSource", bcds);
-		JasperDesign jd = JRXmlLoader.load("relatorio/SemTemplate_ComTabela.jrxml");
+		//JasperDesign jd = JRXmlLoader.load("relatorio/SemTemplate_ComTabela.jrxml");
+		InputStream is = ClienteService.class.getClassLoader().getResourceAsStream("relatorio/SemTemplate_ComTabela.jrxml");
+		JasperDesign jd = JRXmlLoader.load(is);
 		JasperReport report = JasperCompileManager.compileReport(jd);
 		JasperPrint print = JasperFillManager.fillReport(report, params, new JREmptyDataSource());
 		return new InputStreamResource(new ByteArrayInputStream(JasperExportManager.exportReportToPdf(print)));

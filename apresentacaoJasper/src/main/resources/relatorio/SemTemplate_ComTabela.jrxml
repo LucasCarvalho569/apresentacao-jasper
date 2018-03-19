@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SemTemplate_ComTabela" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="fc97a963-c0b6-4c19-a348-7e2773e092a3">
 	<property name="template.engine" value="tabular_template"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexao"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<style name="Table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -40,27 +40,21 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<subDataset name="tableDataset" uuid="583a9bc9-2c7e-4836-b48a-a6566311e9d6">
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexao"/>
+	<subDataset name="ItemDataset" uuid="583a9bc9-2c7e-4836-b48a-a6566311e9d6">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<queryString language="SQL">
-			<![CDATA[SELECT * FROM CLIENTE
-INNER JOIN FILME
-ON CLIENTE.FILME_ID = FILME.ID]]>
+			<![CDATA[]]>
 		</queryString>
 		<field name="nome" class="java.lang.String"/>
 		<field name="cpf" class="java.lang.String"/>
 		<field name="dataNascimento" class="java.sql.Date"/>
-		<field name="COLUMN_7" class="java.lang.String"/>
-		<sortField name="COLUMN_7" order="Descending"/>
-		<group name="COLUMN_7">
-			<groupExpression><![CDATA[$F{COLUMN_7}]]></groupExpression>
+		<field name="filme.nome" class="java.lang.String"/>
+		<sortField name="filme.nome" order="Descending"/>
+		<group name="Filme">
+			<groupExpression><![CDATA[$F{filme.nome}]]></groupExpression>
 		</group>
 	</subDataset>
-	<queryString>
-		<![CDATA[SELECT * FROM FILME]]>
-	</queryString>
-	<field name="id" class="java.lang.Integer"/>
-	<field name="nome" class="java.lang.String"/>
+	<parameter name="ItemDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<title>
 		<band height="86">
 			<componentElement>
@@ -72,16 +66,16 @@ ON CLIENTE.FILME_ID = FILME.ID]]>
 					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="tableDataset" uuid="94ccd814-9a41-4648-9f58-8a0635673212">
-						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<datasetRun subDataset="ItemDataset" uuid="438235ac-ae14-427e-b6a7-57e6a27c11aa">
+						<dataSourceExpression><![CDATA[$P{ItemDataSource}]]></dataSourceExpression>
 					</datasetRun>
 					<jr:columnGroup width="586" uuid="edaba382-b7b3-4cde-ac06-e680dc97ed47">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [4]"/>
-						<jr:groupHeader groupName="COLUMN_7">
+						<jr:groupHeader groupName="Filme">
 							<jr:cell style="Table_CH" height="25">
 								<textField>
 									<reportElement x="0" y="0" width="360" height="25" uuid="a111c2c3-9c6d-4f81-9574-5af9efafb776"/>
-									<textFieldExpression><![CDATA[$F{COLUMN_7}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{filme.nome}]]></textFieldExpression>
 								</textField>
 							</jr:cell>
 						</jr:groupHeader>
@@ -166,7 +160,7 @@ ON CLIENTE.FILME_ID = FILME.ID]]>
 									<textElement>
 										<font fontName="DejaVu Sans" size="12" isBold="true"/>
 									</textElement>
-									<text><![CDATA[COLUMN_7]]></text>
+									<text><![CDATA[Filme]]></text>
 								</staticText>
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="30">
@@ -176,7 +170,7 @@ ON CLIENTE.FILME_ID = FILME.ID]]>
 									<textElement>
 										<font fontName="DejaVu Sans" size="12"/>
 									</textElement>
-									<textFieldExpression><![CDATA[$F{COLUMN_7}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{filme.nome}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
@@ -186,20 +180,6 @@ ON CLIENTE.FILME_ID = FILME.ID]]>
 		</band>
 	</title>
 	<detail>
-		<band height="107">
-			<subreport>
-				<reportElement x="40" y="30" width="140" height="64" isPrintWhenDetailOverflows="true" uuid="99c25243-09bd-4c53-b208-2b3cf86f680e"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["Coffee_Table_Based.jasper"]]></subreportExpression>
-			</subreport>
-			<componentElement>
-				<reportElement x="200" y="30" width="370" height="61" uuid="7d4920dd-0f93-4332-85ce-c248251ece00">
-					<property name="com.jaspersoft.studio.unit.barWidth" value="pixel"/>
-				</reportElement>
-				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="2of7" drawText="false" checksumRequired="false">
-					<jr:codeExpression><![CDATA["12345678909898887"]]></jr:codeExpression>
-				</jr:barbecue>
-			</componentElement>
-		</band>
+		<band height="107"/>
 	</detail>
 </jasperReport>

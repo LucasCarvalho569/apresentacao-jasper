@@ -2,12 +2,13 @@ package com.stefanini.apresentacaoJasper.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,10 +27,11 @@ public class Cliente {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@Column(name = "datanascimento")
 	private Date dataNascimento;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
+	@ManyToOne
+	@JoinColumn(name = "filme.id")
 	private Filme filme;
 
 	public Integer getId() {
