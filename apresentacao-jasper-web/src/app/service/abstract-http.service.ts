@@ -43,8 +43,10 @@ export abstract class AbstractHttpService<T> {
             .catch(error => Observable.throw(error.json().message || this.DEFAULT_ERROR_MESSAGE))
     }
 
-    public get(): Observable<Blob> {
-        return this.http.get(`${this.apiUrl}${this.resource}`, this.getOptionsForBlob())
+    public get(mensagem?: string): Observable<Blob> {
+        if(!mensagem) mensagem = "";
+        debugger
+        return this.http.get(`${this.apiUrl}${this.resource}/${mensagem}`, this.getOptionsForBlob())
             .map(res => {
                 this.filename = res.headers.get('content-disposition').substr(20);
                 return new Blob([res.blob()], { type: res.blob().type })

@@ -36,7 +36,19 @@ public class ClienteService {
 		JRBeanCollectionDataSource bcds = new JRBeanCollectionDataSource(clientesDTO);
 		Map<String, Object> params = new HashMap<>();
 		params.put("ItemDataSource", bcds);
-		//JasperDesign jd = JRXmlLoader.load("relatorio/SemTemplate_ComTabela.jrxml");
+		InputStream is = ClienteService.class.getClassLoader().getResourceAsStream("relatorio/SemTemplate_ComTabela.jrxml");
+		JasperDesign jd = JRXmlLoader.load(is);
+		JasperReport report = JasperCompileManager.compileReport(jd);
+		JasperPrint print = JasperFillManager.fillReport(report, params, new JREmptyDataSource());
+		return new InputStreamResource(new ByteArrayInputStream(JasperExportManager.exportReportToPdf(print)));
+	}
+
+	public InputStreamResource gerarRelatorioComParametro(String mensagem) throws JRException {
+		List<ClienteDTO> clientesDTO = ClienteConverter.converterLista(clienteRepository.findAll());
+		JRBeanCollectionDataSource bcds = new JRBeanCollectionDataSource(clientesDTO);
+		Map<String, Object> params = new HashMap<>();
+		params.put("ItemDataSource", bcds);
+		params.put("mensagem", mensagem);
 		InputStream is = ClienteService.class.getClassLoader().getResourceAsStream("relatorio/SemTemplate_ComTabela.jrxml");
 		JasperDesign jd = JRXmlLoader.load(is);
 		JasperReport report = JasperCompileManager.compileReport(jd);

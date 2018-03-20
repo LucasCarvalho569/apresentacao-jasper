@@ -14,4 +14,8 @@ export class ClienteService extends AbstractHttpService<any[]> {
     public gerarRelatorio(): Observable<Blob> {
         return this.get();
     }
+
+    public gerarRelatorioComParametro(mensagem: string): Observable<Blob> {
+        return this.get(mensagem);
+    }
 }

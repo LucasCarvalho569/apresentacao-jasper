@@ -8,5 +8,5 @@ import com.stefanini.apresentacaoJasper.model.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
-	
+	 
 }

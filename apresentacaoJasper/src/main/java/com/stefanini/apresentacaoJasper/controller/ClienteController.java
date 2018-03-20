@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,15 @@ public class ClienteController {
 				.contentLength(clienteService.gerarRelatorio().contentLength())
 				.contentType(MediaType.APPLICATION_PDF)
 				.body(clienteService.gerarRelatorio());
+	}
+	
+	@GetMapping("{mensagem}")
+	public ResponseEntity<InputStreamResource> gerarRelatorioComParametro(@PathVariable String mensagem) throws IOException, JRException {
+		return ResponseEntity.ok()
+				.headers(construirHeaders("SemTemplate_ComTabela" + new Date()))
+				.contentLength(clienteService.gerarRelatorioComParametro(mensagem).contentLength())
+				.contentType(MediaType.APPLICATION_PDF)
+				.body(clienteService.gerarRelatorioComParametro(mensagem));
 	}
 	
 	private HttpHeaders construirHeaders(String fileName) {
